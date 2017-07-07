@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <title>Prueba</title>
+    <meta name="viewport" content="width=device-width, maximum-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-aria.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.js"></script>
+</head>
+<body ng-app='myApp' ng-controller='MainCtrl'>
+
+	<md-autocomplete 
+		md-selected-item="selectedItem" 
+		md-item-text="employee.employeeAndId.id"
+		md-search-text="employeeId" 
+		md-items="employee in query(employeeId)"
+		md-autoselect="true"
+		md-clear-button="true">
+	  <md-item-template>
+	    <span md-highlight-text="employeeId">{{employee.employeeAndId.id}}</span>
+	  </md-item-template>
+	  <md-not-found>
+	      No matches found.
+	  </md-not-found>
+	</md-autocomplete>
+
+	<input type="text" ng-model="selectedItem.employeeAndId.name">
+
+    <script type="text/javascript">
+    	var app = angular.module( 'myApp', [ 'ngMaterial' ] );
+    	app.controller("MainCtrl", function($scope, $http) {
+    		
+    		$scope.query = function(employeeId) {
+    		    return $http
+    		      .get('http://localhost:3000/api/' + employeeId)
+    		      .then(function(data) {
+    		        // Map the response object to the data object.
+    		        console.log(data.data)
+    		        return data.data;
+    		      });
+    		 };
+    	});
+
+    </script>
+</body>
+</html>

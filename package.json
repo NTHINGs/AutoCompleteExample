@@ -1,0 +1,14 @@
+{
+  "name": "PRUEBA",
+  "version": "1.0.0",
+  "description": "PRUEBA",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.0",
+  }
+}
